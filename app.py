@@ -7,11 +7,11 @@ import os
 def random_suffix(length):
     return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
-def get_random_funny_link():
-    return random.choice([
-        "https://lhohq.info/",
-        "https://hemansings.com/"
-    ])
+def generate_random_link():
+    if random.choice([True, False]):
+        return f"http://dx.doi.org/{random_suffix(16)}"
+    else:
+        return f"http://refhub.elsevier.com/{random_suffix(31)}"
 
 def update_pdf_links(input_bytes):
     doc = fitz.open("pdf", input_bytes)
@@ -27,8 +27,8 @@ def update_pdf_links(input_bytes):
                 new_uri = f"http://dx.doi.org/{random_suffix(16)}"
             elif uri.startswith("http://refhub.elsevier.com/"):
                 new_uri = f"http://refhub.elsevier.com/{random_suffix(31)}"
-            elif uri:  # Qualquer outro link válido
-                new_uri = get_random_funny_link()
+            elif uri.startswith("http"):
+                new_uri = generate_random_link()
 
             if new_uri:
                 page.delete_link(link)
@@ -42,10 +42,10 @@ def update_pdf_links(input_bytes):
     doc.close()
     return output_bytes
 
-# Streamlit App
+# Streamlit UI
 st.set_page_config(page_title="Professor Aaron's Magical Tool", layout="centered")
-st.title("🔗 PDF DOI links sabotage tool for shady purposes")
-st.write("Upload one or more PDF files to anonymize their DOI, RefHub, or any other links.")
+st.title("🔗 PDF DOI Link Scrambler")
+st.write("Upload PDF files to randomize their DOI, RefHub, and other HTTP links.")
 
 uploaded_files = st.file_uploader("📎 Upload PDF files", type="pdf", accept_multiple_files=True)
 
