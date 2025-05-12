@@ -52,7 +52,7 @@ if uploaded_files:
             st.download_button(
                 label=f"📥 Download Modified: {uploaded_file.name}",
                 data=modified_pdf,
-                file_name=f"{os.path.splitext(uploaded_file.name)[0]}_EB1.pdf",
+                file_name=f"{os.path.splitext(uploaded_file.name)[0]}_vaitomando.pdf",
                 mime="application/pdf"
             )
         except Exception as e:
