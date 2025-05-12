@@ -44,7 +44,7 @@ def update_pdf_links(input_bytes):
 
 # Streamlit UI
 st.set_page_config(page_title="Professor Aaron's Magical Tool", layout="centered")
-st.title("🔗 PDF DOI Link Scrambler")
+st.title("🔗 PDF DOI Link sabotage tool for shady purposes")
 st.write("Upload PDF files to randomize their DOI, RefHub, and other HTTP links.")
 
 uploaded_files = st.file_uploader("📎 Upload PDF files", type="pdf", accept_multiple_files=True)
